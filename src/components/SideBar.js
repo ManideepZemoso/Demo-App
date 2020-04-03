@@ -14,6 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Navigation from "./Navigation";
 
 
 const drawerWidth = 240;
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     appBar: {
+        backgroundcolor:'deepskyblue',
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -73,9 +75,10 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: 0,
     },
+
 }));
 
-export default function PersistentDrawerLeft() {
+export default function SideBar() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -128,12 +131,20 @@ export default function PersistentDrawerLeft() {
                 </div>
                 <Divider />
                 <List>
-                    {['Login','Location'].map((text, index) => (
+                    {!window.sessionStorage.getItem('isAuthenticated')?
+                        ['Map'  ].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
-                    ))}
+                    )): ['Map','Location'].map((text, index) => (
+                            <ListItem button key={text}>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        ))}
+
                 </List>
+
+                <Navigation />
             </Drawer>
         </div>
     );
