@@ -34,17 +34,19 @@ export default class LoginForm extends React.Component{
     }
     render() {
         return (
-            <div>
+            <div style={{textAlign:'center'}}>
                 <div>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <Typography variant="h6" >
-                                Login Page
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+                    {/*<AppBar position="static">*/}
+                    {/*    <Toolbar>*/}
+                    {/*        <Typography variant="h6" >*/}
+                    {/*            Login Page*/}
+                    {/*        </Typography>*/}
+                    {/*    </Toolbar>*/}
+                    {/*</AppBar>*/}
+
+                    <h1 style={{alignment:'center' ,top:'200px'}}>Login Form</h1>
                 </div>
-                <form style={{display:'grid',border: '1px solid #f1f1f1',width:'200px',height:'200px',alignContent: 'space-between',}}>
+                <form style={{alignContent:'space-between'}}>{/*style={{textAlign:'center',display:'grid',top:'200px',left:'900px',right:'200px' ,border: '1px solid #f1f1f1',width:'200px',height:'300px',alignContent: 'space-between',}}*/}
                     <Input placeholder="Username"
                            value={this.state.username}
                            onChange={e => this.setState({username: e.target.value})}
@@ -57,7 +59,8 @@ export default class LoginForm extends React.Component{
                            style={{padding:'12px 20px'}}
                            inputProps={{ 'aria-label': 'description','type':'password','align':'center','width': '100%','padding': '12px 20px','margin': '8px 0','display': 'inline-block','border': '1px solid #ccc'}} />
                     <br />
-                    <button style={{backgroundColor:'#3f51b5',width:'200px',color:'white',height:'40px',paddingBottom:'20px'}} onClick={e => this.onSubmit(e)}>
+                    <br />
+                    <button style={{backgroundColor:'#3f51b5',width:'200px',color:'white',height:'40px',paddingBottom:'20px', paddingtop:'20px',fontSize:'20px'}} onClick={e => this.onSubmit(e)}>
                         LogIn
                     </button>
 

@@ -49,7 +49,7 @@ class Navigation extends React.Component{
                     }} className="navbar">
 
                         <NavLink Style={{
-                            fontWeight: "bold"}} to={toElement}><Button variant="contained" color="primary" >
+                            fontWeight: "bold"}} to={toElement}><Button variant="contained" color="primary">
                             {element}
                         </Button></NavLink>
 

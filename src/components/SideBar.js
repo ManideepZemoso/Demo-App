@@ -15,6 +15,10 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Navigation from "./Navigation";
+import {NavLink,withRouter} from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import mapboxgl from 'mapbox-gl';
+import {Map} from "./MapComponents/Map";
 
 
 const drawerWidth = 240;
@@ -78,7 +82,9 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SideBar() {
+function SideBar(props) {
+    console.log(props);
+
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -134,18 +140,31 @@ export default function SideBar() {
                     {!window.sessionStorage.getItem('isAuthenticated')?
                         ['Map'  ].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemText primary={text} />
+                           <NavLink Style={{
+                                fontWeight: "bold"}} to='/map'>
+                               <ListItemText primary={text} />
+                           </NavLink>
                         </ListItem>
-                    )): ['Map','Location'].map((text, index) => (
+                    )): ['Map','Locations'].map((text, index) => (
+                            // <ListItem button key={text}>
+                            //     <ListItemText primary={text} />
+                            //     <ListItem button component={Link} to='/some-url'>...</ListItem>
+                            // </ListItem>
                             <ListItem button key={text}>
-                                <ListItemText primary={text} />
+                                <NavLink Style={{
+                                    fontWeight: "bold"}} to={'/'+text.toLowerCase()}>
+                                    <ListItemText primary={text} />
+                                </NavLink>
                             </ListItem>
+                            // <ListItem button component={Link} to='/map'>{text}</ListItem>
                         ))}
 
                 </List>
 
                 <Navigation />
             </Drawer>
+
         </div>
     );
 }
+export default withRouter(SideBar);
