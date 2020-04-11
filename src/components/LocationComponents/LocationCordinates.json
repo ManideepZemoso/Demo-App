@@ -1,0 +1,25 @@
+[{
+  "id": 1,
+  "Location": "Hyderabad",
+  "Longitude": 78.4111,
+  "Latitude": 17.4334
+},
+  {
+    "id": 2,
+    "Location": "Secundrabad",
+    "Longitude": 56,
+    "Latitude": 78
+  },
+  {
+    "id": 3,
+    "Location": "Chennai",
+    "Longitude": 56,
+    "Latitude": 78
+  },
+  {
+    "id": 4,
+    "Location": "Banglore",
+    "Longitude": 56,
+    "Latitude": 78
+  }
+]
