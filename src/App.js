@@ -24,21 +24,21 @@ export class App extends React.Component {
     }
     render() {
         return (
-
+            <Provider store={store}>
             <BrowserRouter>
-                <Provider store={store}>
+
                 <SideBar/>
                 <Switch>
                     <Route path="/" component={Map} exact  appProps={this.props} ></Route>
                     <Route path="/login" component={LoginForm} appProps={this.props} />
-                    <Route path="/map" component={Map} appProps={this.props} />
-                    <PrivateRoute exact path="/locations" component={Locations} />
+                    <Route path="/map" component={Map} appProps={this.props} store={store} />
+                    <PrivateRoute exact path="/locations" component={Locations} store ={store} />
                     <PrivateRoute path="/locations/new" component={Map} />
                     <PrivateRoute path="/locations/:location_id" component={Map} appProps={this.props} />
 
                 </Switch>
-                </Provider>
             </BrowserRouter>
+            </Provider>
 
         );
     }

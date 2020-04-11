@@ -1,5 +1,5 @@
 // import {UPDATE_LAT,UPDATE_LONG,ZOOM} from "./mapType";
-import {UPDATE_CORDINATES} from "./mapType";
+import {UPDATE_CORDINATES} from "../types/mapType";
 
 /*export const updateLat = () => {
     return {
