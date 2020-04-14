@@ -121,34 +121,33 @@ export class Map extends React.Component{
                 <div className='sidebarStyle'>
                     <div>Longitude: {this.props.mapprops.lng} | Latitude: {this.props.mapprops.lat} | Zoom: {this.props.mapprops.zoom}</div>
                 </div>
-                <InputBase
-                    className='input'
-                    placeholder="Longitude, Latitude"
-                    inputProps={{ 'aria-label': 'search google maps' }}
-                    onChange={this.updateValue}
-                />
-                <IconButton  id="searchSubmit" type="submit" className='iconButton' aria-label="search">
-                    <SearchIcon onClick={this.searchSubmit}/>
-                </IconButton>
-               <IconButton  id="changeView" type="submit" className='viewButton' style={{backgroundColor :'white',color:'black', top:'140px'}}>
-                   <PublicIcon onClick={this.changeView}/>
-               </IconButton>
-               <IconButton  id="zoomIn" type="submit" className='viewButton' style={{backgroundColor :'white',color:'black', top:'140px'}}>
-                   <ZoomInIcon onClick={this.zoomIn}/>
-               </IconButton>
-               <IconButton  id="zoomOut" type="submit" className='viewButton' style={{backgroundColor :'white',color:'black', top:'140px'}}>
-                   <ZoomOutIcon onClick={this.zoomOut}/>
-               </IconButton>
-              {/* <input  id='locationName' type='text' value={"LoctionName"}></input*/}>
-              {/* {!isFromNewlocation ? <Button id="AddLocationButton"variant="contained" color="primary" style={{top: '200px',
-               zIndex: '2',
-               left: '1000px' }} onClick={this.addLocation} diabled>Add this to location</Button>:
-                   <Button id="AddLocationButton"variant="contained" color="primary" style={{top: '200px',
-                       zIndex: '2',
-                       left: '1000px' }} onClick={this.addLocation} >Add this to location</Button>}*/}
-               <Button id="AddLocationButton"variant="contained" color="primary" style={{top: '200px',
-                   zIndex: '2',
-                   left: '1000px' }} onClick={this.addLocation} disabled={!isFromNewlocation}>Add this to location</Button>}
+               <div className='searchboxStyle'>
+                   <InputBase
+                       className='input'
+                       placeholder="Lng,Lat"
+                       inputProps={{ 'aria-label': 'search google maps' }}
+                       onChange={this.updateValue}
+                   />
+                   <IconButton  id="searchSubmit" type="submit" className='iconButton' aria-label="search">
+                       <SearchIcon onClick={this.searchSubmit}/>
+                   </IconButton>
+               </div>
+               <div className='buttonStyle'>
+                   <IconButton  id="changeView" type="submit" className='viewButton' >
+                       <PublicIcon onClick={this.changeView}/>
+                   </IconButton>
+                   <IconButton  id="zoomIn" type="submit" className='viewButton' >
+                       <ZoomInIcon onClick={this.zoomIn}/>
+                   </IconButton>
+                   <IconButton  id="zoomOut" type="submit" className='viewButton' >
+                       <ZoomOutIcon onClick={this.zoomOut}/>
+                   </IconButton>
+               </div>
+
+                       <div className='addLocationStyle'>
+                           <Button id="AddLocationButton"variant="contained" color="primary"  onClick={this.addLocation} disabled={!isFromNewlocation}>Add this to location</Button>
+                       </div>
+
                 <div ref={el => this.mapContainer = el} className='mapContainer' />
             </div>
         );

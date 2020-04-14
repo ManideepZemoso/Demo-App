@@ -58,36 +58,49 @@
   bottom: 0;
 }
 .input{
-  top:120px;
-  position:absolute;
-  display: inline-block;
-  left:35%;
-  width:380px;
+  position: absolute;
+  padding: 10px;
   background-color: white;
-  margin:12px;
-  font-weight: bold;
-  padding:10px;
+  color: #ffffff;
   z-index: 1 !important;
-  flex: 1
+  font-weight: bold;
+  width:100px;
 }
-.iconButton{
-  padding: 10px;
-  left:30%;
-  z-index: 2 !important;
-  top:120px;
-}
-.viewButton{
-  position:absolute;
-  padding: 10px;
-  right:-65%;
-  z-index: 2 !important;
-  top:120px;
-  display: inline-block;
+.searchboxStyle{
 
+  position: absolute;
+  top:200px;
+  margin: 12px;
+  background-color: white;
+  color: black;
+  z-index: 2 !important;
+  padding: 6px;
+  left:40%;
+  font-weight: bold;
+}
+#searchSubmit{
+  background-color: white;
+  color: black;
+  z-index: 2;
+}
+.buttonStyle{
+  position: absolute;
+  bottom: 50px;
+  right:0;
+  margin: 12px;
+  background-color: white;
+  color: black;
+  z-index: 2 !important;
+  padding: 6px;
+  font-weight: bold;
+}
+#zoomIn,#zoomOut,#changeView{
+  background-color: white;
+  color: black;
 }
 .table{
+  position: absolute;
   top:500px;
-  min-width: 650px;
 }
 .marker {
   background-image: url('images.png');
@@ -98,11 +111,14 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.AddLocationButton{
-  position:absolute;
-  padding: 10px;
-  z-index: 2 !important;
-  top:160px;
+.addLocationStyle{
   display: inline-block;
+  position: absolute;
+  top: 300px;
+  right:0;
+  margin: 12px;
+  z-index: 1 !important;
+  padding: 6px;
+  font-weight: bold;
 }
 
