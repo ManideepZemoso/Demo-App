@@ -9,11 +9,26 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import TableCell from "@material-ui/core/TableCell";
 
-class LocationPresentation extends React.Component{
+class Locations extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.sortById=this.sortById.bind(this);
+    }
+
+    sortById() {
+        console.log('sort byid function call');
+        this.props.LocationList.sort((a, b) => (a.id > b.id) ? 1 : -1);
+        console.log(this.props.LocationList);
+        this.forceUpdate();
+    }
+
     render(){
         console.log(this.props);
         return (
-            <div style={{textAlign:'center'}}>
+
+            <div style={{padding: '20px',
+                marginTop: '60px'}}>
                 {/* <NavLink to='/locations/new'> <Button  style={{ margin: '0 auto',
                 top:'100px'
              }} variant="contained" color="primary"><h1>Add new location</h1></Button>
@@ -21,6 +36,11 @@ class LocationPresentation extends React.Component{
 
                 <div>
                     <h1>Locations</h1>
+                    <div style={{marginBottom:'10px'}}>
+                        <button onClick={this.sortById}> SortBy Id</button>
+                        <NavLink to='/locations/new'> <button>Add new location</button>
+                        </NavLink>
+                    </div>
                     <TableContainer component={Paper}>
                         <Table className='' aria-label="simple table">
                             <TableHead>
@@ -48,9 +68,12 @@ class LocationPresentation extends React.Component{
                     </TableContainer>
                 </div>
 
+
             </div>
         );
 
     }
+
+
 }
-export default LocationPresentation;
+export default Locations;

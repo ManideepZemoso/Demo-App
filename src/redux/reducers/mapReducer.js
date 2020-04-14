@@ -1,10 +1,12 @@
-/*import {UPDATE_LAT,UPDATE_LONG,ZOOM} from "./mapType";*/
 import  {UPDATE_CORDINATES} from "../types/mapType";
-import * as map from "mapbox-gl";
-import GetLocationData from '../../components/LocationComponents/LocationCordinates';
 
-const mapReducer =(state= [] ,action) => {
-    console.log(state)
+
+const intialState={
+    lng: 78.486671,
+    lat: 17.385044,
+    zoom: 5
+}
+const mapReducer =(state= intialState ,action) => {
     switch(action.type){
         case UPDATE_CORDINATES: return {
             ...state,

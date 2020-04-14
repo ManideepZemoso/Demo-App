@@ -1,9 +1,8 @@
 import React from "react";
 import Input from '@material-ui/core/Input';
 import GetData from './ValidCredentials.json';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+
+
 
 
 export default class LoginForm extends React.Component{

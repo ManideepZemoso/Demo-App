@@ -2,12 +2,9 @@ import React from 'react';
 import './App.css';
 import SideBar from "./components/SideBar";
 import {BrowserRouter, Route, Switch,Redirect} from "react-router-dom";
-import LoginForm from "./components/LoggingComponents/LoginForm";
-import {Logout} from "./components/junk components/Logout";
-import Map from "./components/MapComponents/Map";
-import {NewMap} from "./components/MapComponents/NewMap";
-import {NewLocation} from "./components/LocationComponents/NewLocation";
-import Locations from "./components/LocationComponents/Locations";
+import LoginForm from "./components/Logging/LoginForm";
+import MapContainer from "./components/Map/MapContainer";
+import LocationsContainer from "./components/Location/LocationsContainer";
 import {Provider} from 'react-redux';
 import store from './redux/store';
 
@@ -29,12 +26,12 @@ export class App extends React.Component {
 
                 <SideBar/>
                 <Switch>
-                    <Route path="/" component={Map} exact  appProps={this.props} ></Route>
+                    <Route path="/" component={MapContainer} exact  appProps={this.props} ></Route>
                     <Route path="/login" component={LoginForm} appProps={this.props} />
-                    <Route path="/map" component={Map} appProps={this.props} store={store} />
-                    <PrivateRoute exact path="/locations" component={Locations} store ={store} />
-                    <PrivateRoute path="/locations/new" component={Map} />
-                    <PrivateRoute path="/locations/:location_id" component={Map} appProps={this.props} />
+                    <Route path="/map" component={MapContainer} appProps={this.props} store={store} />
+                    <PrivateRoute exact path="/locations" component={LocationsContainer} store ={store} />
+                    <PrivateRoute path="/locations/new" component={MapContainer} />
+                    <PrivateRoute path="/locations/:location_id" component={MapContainer} appProps={this.props} />
 
                 </Switch>
             </BrowserRouter>

@@ -16,9 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Navigation from "./Navigation";
 import {NavLink,withRouter} from "react-router-dom";
-import Link from "@material-ui/core/Link";
-import mapboxgl from 'mapbox-gl';
-import {Map} from "./MapComponents/Map";
+
 
 
 const drawerWidth = 240;

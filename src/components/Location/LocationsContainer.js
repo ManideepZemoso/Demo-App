@@ -1,10 +1,10 @@
 import React from "react";
 import {GetLocations} from "../../redux/actions/locationsAction";
 import {connect} from "react-redux";
-import LocationPresentation from '../LocationComponents/LocationPresentation'
+import Locations from './Locations'
 
 let locationlist;
-class Locations extends React.Component{
+class LocationsContainer extends React.Component{
     constructor(props) {
         super(props);
         console.log(props);
@@ -12,27 +12,29 @@ class Locations extends React.Component{
         console.log(locationlist);
     }
     componentDidMount() {
-
-    locationlist=this.props.GetLocations(23);
+        this.props.GetLocations();
+    locationlist=this.props.locations;
+        console.log(locationlist);
     }
 
     render() {
      return (
 
-        <LocationPresentation LocationList={locationlist}> </LocationPresentation>
+        <Locations LocationList={locationlist}> </Locations>
      );
  }
 }
 
-function mapStateToProps(state){
+function mapStateToProps({location}){
     return{
-      locations:state.locations
+      locations:location.locations
     };
 }
 
 function  mapDispatchToProps(dispatch) {
     return{
-        GetLocations:(zoom)=>dispatch(GetLocations(zoom))
+        GetLocations:()=>dispatch(GetLocations())
+
     };
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Locations);
+export default connect(mapStateToProps,mapDispatchToProps)(LocationsContainer);
