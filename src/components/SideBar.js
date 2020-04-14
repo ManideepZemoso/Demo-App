@@ -138,7 +138,7 @@ function SideBar(props) {
                     {!window.sessionStorage.getItem('isAuthenticated')?
                         ['Map'  ].map((text, index) => (
                         <ListItem button key={text}>
-                           <NavLink Style={{
+                           <NavLink style={{
                                 fontWeight: "bold"}} to='/map'>
                                <ListItemText primary={text} />
                            </NavLink>
@@ -149,7 +149,7 @@ function SideBar(props) {
                             //     <ListItem button component={Link} to='/some-url'>...</ListItem>
                             // </ListItem>
                             <ListItem button key={text}>
-                                <NavLink Style={{
+                                <NavLink style={{
                                     fontWeight: "bold"}} to={'/'+text.toLowerCase()}>
                                     <ListItemText primary={text} />
                                 </NavLink>

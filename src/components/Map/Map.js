@@ -9,22 +9,12 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Button from "@material-ui/core/Button";
 
 let LatNLong='19,13';
-let locationList;
-let locationid;
-let lastlocationId;
-let isFromNewlocation;
+
 export class Map extends React.Component{
     map;
     constructor(props) {
         console.log(props);
         super(props);
-        locationList=props.mapprops.locationList;
-
-
-        isFromNewlocation = false;
-        if(props.mapprops.match.path==='/locations/new'){
-            isFromNewlocation=true;
-        }
         this.searchSubmit=this.searchSubmit.bind(this);
         this.changeView=this.changeView.bind(this);
         this.updateValue=this.updateValue.bind(this);
@@ -36,33 +26,17 @@ export class Map extends React.Component{
         this.map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.props.mapprops.lat, this.props.mapprops.lng],
+            center: [this.props.lat, this.props.lng],
             zoom: 6
         });
 
         this.map.on('moveend', () => {
-            this.props.mapprops.UpdateCordinates(this.map.getCenter().lng, this.map.getCenter().lat, this.map.getZoom())
+            this.props.UpdateCordinates(this.map.getCenter().lng, this.map.getCenter().lat, this.map.getZoom())
         });
         this.map.on('click',(e)=>{this.getCordinate(e)} );
-        let id=this.props.mapprops.match.params.location_id;
-        let isCallFromLocation=false;
 
-         console.log(isFromNewlocation);
-         for(let i=0;i<locationList.length;i++){
-             console.log(locationList[i]);
-             if(id===locationList[i].id){
-                 console.log(locationList[i]);
-                 isCallFromLocation=true;
-                 locationid=i;
-                 break;
-             }
-             lastlocationId=i;
-         }
-         if(!isCallFromLocation && !isFromNewlocation){
-             this.props.mapprops.history.push('/map');
-         }
-         else if(isCallFromLocation){
-             LatNLong= locationList[locationid].Longitude +"," +locationList[locationid].Latitude;
+       if(this.props.isCallFromLocation){
+             LatNLong= this.props.lat+','+ this.props.lng;
              console.log(LatNLong);
              this.searchSubmit();
          }
@@ -79,7 +53,7 @@ export class Map extends React.Component{
          console.log(LatNLong);
      }
      addLocation(){
-         this.props.mapprops.AddLocation(lastlocationId+2,'Location-'+(lastlocationId+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
+         this.props.AddLocation(this.props.lastlocationId+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
      }
 
      updateValue(e){
@@ -119,7 +93,7 @@ export class Map extends React.Component{
         return (
            <div>
                 <div className='sidebarStyle'>
-                    <div>Longitude: {this.props.mapprops.lng} | Latitude: {this.props.mapprops.lat} | Zoom: {this.props.mapprops.zoom}</div>
+                    <div>Longitude: {this.props.lng} | Latitude: {this.props.lat} | Zoom: {this.props.zoom}</div>
                 </div>
                <div className='searchboxStyle'>
                    <InputBase
@@ -145,7 +119,7 @@ export class Map extends React.Component{
                </div>
 
                        <div className='addLocationStyle'>
-                           <Button id="AddLocationButton"variant="contained" color="primary"  onClick={this.addLocation} disabled={!isFromNewlocation}>Add this to location</Button>
+                           <Button id="AddLocationButton"variant="contained" color="primary"  onClick={this.addLocation} disabled={!(this.props.isFromNewlocation)}>Add this to location</Button>
                        </div>
 
                 <div ref={el => this.mapContainer = el} className='mapContainer' />
