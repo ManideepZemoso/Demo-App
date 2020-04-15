@@ -44,7 +44,8 @@ class MapContainer extends React.Component {
     }
     render() {
         return (
-           <Map lat={this.props.lat} lng={this.props.lng} isCallFromLocation={isCallFromLocation} isFromNewlocation={isFromNewlocation} UpdateCordinates={this.props.UpdateCordinates} AddLocation={this.props.AddLocation} lastlocationId={lastlocationId}/>
+           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom}
+                isCallFromLocation={isCallFromLocation} isFromNewlocation={isFromNewlocation} UpdateCordinates={this.props.UpdateCordinates} AddLocation={this.props.AddLocation} lastlocationId={lastlocationId}/>
         );
     }
 
