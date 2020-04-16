@@ -12,7 +12,6 @@ import TableCell from "@material-ui/core/TableCell";
 class Locations extends React.Component{
     constructor(props){
         super(props);
-
         this.sortById=this.sortById.bind(this);
     }
 
@@ -22,6 +21,11 @@ class Locations extends React.Component{
         console.log(this.props.LocationList);
         this.forceUpdate();
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.sort!==this.props.sort && this.props.sort===true){
+            this.sortById();
+        }
+    }
 
     render(){
         console.log(this.props);
@@ -29,17 +33,11 @@ class Locations extends React.Component{
 
             <div style={{padding: '20px',
                 marginTop: '60px'}}>
-                {/* <NavLink to='/locations/new'> <Button  style={{ margin: '0 auto',
-                top:'100px'
-             }} variant="contained" color="primary"><h1>Add new location</h1></Button>
-            </NavLink>*/}
-
                 <div>
                     <h1>Locations</h1>
                     <div style={{marginBottom:'10px'}}>
-                        <button onClick={this.sortById}> SortBy Id</button>
-                        <NavLink to='/locations/new'> <button>Add new location</button>
-                        </NavLink>
+                        <button onClick={this.props.sortFn}> SortBy Id</button>
+                       <button onClick={this.props.updateToBrowser}>Add new location</button>
                     </div>
                     <TableContainer component={Paper}>
                         <Table className='' aria-label="simple table">

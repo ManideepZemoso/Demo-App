@@ -15,7 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Navigation from "./Navigation";
-import {NavLink,withRouter} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 
@@ -165,4 +165,4 @@ function SideBar(props) {
         </div>
     );
 }
-export default withRouter(SideBar);
+export default SideBar;

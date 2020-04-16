@@ -1,5 +1,6 @@
 import {ADD_LOCATION} from "../types/loctionsType";
 import {GET_LOCATIONS} from "../types/loctionsType";
+import  {SORT} from "../types/loctionsType";
 
 /*export const UpdateLocation=(lng,lat,zoom) => {
     return {
@@ -16,5 +17,10 @@ export const AddLocation =(locationId,locationName,lng,lat)=>{
     return{
         type:ADD_LOCATION,
         payload:{locationId,locationName,lng,lat}
+    }
+}
+export const updateSort=()=>{
+    return{
+        type:SORT
     }
 }

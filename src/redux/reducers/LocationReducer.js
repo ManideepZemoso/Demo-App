@@ -1,4 +1,5 @@
-import {GET_LOCATIONS,ADD_LOCATION} from '../types/loctionsType';
+import {GET_LOCATIONS,ADD_LOCATION,SORT} from '../types/loctionsType';
+
 
 const intialState={
     locations:[{
@@ -25,7 +26,8 @@ const intialState={
             Longitude: 56,
             Latitude: 78
         }
-    ]
+    ],
+    sort:false
 }
 
 const locationReducer=(state=intialState,action)=>{
@@ -49,6 +51,10 @@ const locationReducer=(state=intialState,action)=>{
         }
         case GET_LOCATIONS: return {
             ...state
+        };
+        case SORT: return{
+            ...state,
+            sort:true
         };
         default: return state;
     }

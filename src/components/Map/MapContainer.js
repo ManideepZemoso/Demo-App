@@ -1,7 +1,7 @@
 import React from "react";
 import mapboxgl from 'mapbox-gl';
 import {connect} from 'react-redux';
-import {UpdateCordinates} from "../../redux/actions/mapActions";
+import {UpdateCordinates, UpdateMapStyle} from "../../redux/actions/mapActions";
 import {Map} from './Map';
 import {AddLocation} from "../../redux/actions/locationsAction";
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
@@ -9,7 +9,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmb
 let lastlocationId;
 let isFromNewlocation;
 let locationList;
-let locationid;
 let isCallFromLocation;
 class MapContainer extends React.Component {
 
@@ -33,7 +32,6 @@ class MapContainer extends React.Component {
                 console.log(locationList[i]);
                 isCallFromLocation=true;
                 this.props.UpdateCordinates(locationList[i].Latitude, locationList[i].Longitude, 15)
-                locationid=i;
                 break;
             }
 
@@ -44,7 +42,7 @@ class MapContainer extends React.Component {
     }
     render() {
         return (
-           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom}
+           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom} mapStyle={this.props.mapStyle}  UpdateMapStyle={this.props.UpdateMapStyle}
                 isCallFromLocation={isCallFromLocation} isFromNewlocation={isFromNewlocation} UpdateCordinates={this.props.UpdateCordinates} AddLocation={this.props.AddLocation} lastlocationId={lastlocationId}/>
         );
     }
@@ -58,12 +56,14 @@ function mapStateToProps ({map,location}){
         lat:map.lat,
         lng:map.lng,
         zoom:map.zoom,
+        mapStyle:map.mapStyle,
         locationList:location.locations
     };
 }
 function mapDispatchToProps(dispatch){
     return {
         UpdateCordinates: (lng,lat,zoom) =>dispatch(UpdateCordinates(lng,lat,zoom )),
+        UpdateMapStyle:()=>dispatch(UpdateMapStyle()),
         AddLocation:(locationId,locationName,lng,lat) =>dispatch(AddLocation(locationId,locationName,lng,lat))
     };
 }

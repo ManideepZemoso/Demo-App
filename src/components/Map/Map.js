@@ -13,6 +13,7 @@ let LatNLong='19,13';
 export class Map extends React.Component{
     map;
     constructor(props) {
+        console.log(props.mapStyle);
         console.log(props);
         super(props);
         this.searchSubmit=this.searchSubmit.bind(this);
@@ -25,7 +26,7 @@ export class Map extends React.Component{
     componentDidMount() {
         this.map = new mapboxgl.Map({
             container: this.mapContainer,
-            style: 'mapbox://styles/mapbox/streets-v11',
+            style: this.props.mapStyle,
             center: [this.props.lat, this.props.lng],
             zoom: 6
         });
@@ -73,15 +74,14 @@ export class Map extends React.Component{
          // this.props.AddLocation(5,'newplace',LatNLong.split(',')[0],LatNLong.split(',')[1]);
      }
     changeView(){
-        console.log(LatNLong);
-        if(this.map.getStyle().name ==='Mapbox Streets'){
-            this.map.setStyle('mapbox://styles/mapbox/satellite-v9' );
-        }
-        else{
-            this.map.setStyle('mapbox://styles/mapbox/streets-v11' );
-        }
-
+        this.props.UpdateMapStyle();
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.mapStyle!==this.props.mapStyle){
+            this.map.setStyle(this.props.mapStyle);
+        }
+    }
+
     zoomIn(){
         this.map.zoomIn();
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import {GetLocations} from "../../redux/actions/locationsAction";
+import {GetLocations,updateSort} from "../../redux/actions/locationsAction";
 import {connect} from "react-redux";
 import Locations from './Locations'
 
@@ -10,31 +10,36 @@ class LocationsContainer extends React.Component{
         console.log(props);
         locationlist=props.locations;
         console.log(locationlist);
+        this.updateToBrowser=this.updateToBrowser.bind(this);
+        this.sortFn=this.sortFn.bind(this);
     }
-    componentDidMount() {
-        this.props.GetLocations();
-    locationlist=this.props.locations;
-        console.log(locationlist);
+    updateToBrowser(){
+        console.log(this.props);
+        this.props.history.push('/locations/new');
+    }
+    sortFn(){
+        this.props.updateSort();
     }
 
     render() {
      return (
 
-        <Locations LocationList={locationlist}> </Locations>
+        <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={locationlist}> </Locations>
      );
  }
 }
 
 function mapStateToProps({location}){
     return{
-      locations:location.locations
+      locations:location.locations,
+        sort:location.sort
     };
 }
 
 function  mapDispatchToProps(dispatch) {
     return{
-        GetLocations:()=>dispatch(GetLocations())
-
+        GetLocations:()=>dispatch(GetLocations()),
+        updateSort:()=>dispatch(updateSort())
     };
 }
 export default connect(mapStateToProps,mapDispatchToProps)(LocationsContainer);
