@@ -1,11 +1,22 @@
 import React from "react";
 import Input from '@material-ui/core/Input';
 import GetData from './ValidCredentials.json';
+import { withStyles } from '@material-ui/core/styles';
 
 
+const styles ={
+   loginformStyle:{
+    position: 'absolute',
+    top: '100px',
+    left:'25%',
+    right:'25%',
+    margin: '12px',
+    padding: '6px',
+    fontWeight: 'bold'
+}
+}
 
-
-export default class LoginForm extends React.Component{
+class LoginForm extends React.Component{
     constructor(props) {
         super(props);
         this.state= {
@@ -32,8 +43,9 @@ export default class LoginForm extends React.Component{
         }
     }
     render() {
+        const {classes}=this.props;
         return (
-            <div className="loginformStyle">
+            <div className={classes.loginformStyle}>
                 <div>
                     <h1 style={{alignment:'center' ,top:'200px',width:'200px' } }>Login Form</h1>
                 </div>
@@ -62,3 +74,5 @@ export default class LoginForm extends React.Component{
         );
     }
 }
+
+export default withStyles(styles)(LoginForm);
