@@ -100,8 +100,8 @@ let LatNLong='19,13';
 class Map extends React.Component{
     map;
     constructor(props) {
-        console.log(props.mapStyle);
-        console.log(props);
+        /*console.log(props.mapStyle);
+        console.log(props);*/
         super(props);
         this.searchSubmit=this.searchSubmit.bind(this);
         this.changeView=this.changeView.bind(this);
@@ -125,7 +125,6 @@ class Map extends React.Component{
 
        if(this.props.isCallFromLocation){
              LatNLong= this.props.lat+','+ this.props.lng;
-             console.log(LatNLong);
              this.searchSubmit();
          }
 
@@ -148,7 +147,7 @@ class Map extends React.Component{
          LatNLong=e.target.value;
      }
      searchSubmit() {
-         console.log(LatNLong);
+        // console.log(LatNLong);
          this.map.flyTo({
              center: [
                  LatNLong.split(',')[0],
@@ -190,18 +189,18 @@ class Map extends React.Component{
                        inputProps={{ 'aria-label': 'search google maps' }}
                        onChange={this.updateValue}
                    />
-                   <IconButton  type="submit" className={classes.searchSubmit} aria-label="search">
+                   <IconButton  id='searchSubmit' type="submit" className={classes.searchSubmit} aria-label="search">
                        <SearchIcon onClick={this.searchSubmit}/>
                    </IconButton>
                </div>
                <div className={classes.buttonStyle}>
-                   <IconButton   type="submit" className={classes.changeVIew}>
+                   <IconButton   id='changeView' type="submit" className={classes.changeVIew}>
                        <PublicIcon onClick={this.changeView}/>
                    </IconButton>
-                   <IconButton  type="submit" className={classes.zoomIn }>
-                       <ZoomInIcon onClick={this.zoomIn}/>
+                   <IconButton  id='zoomIn'  type="submit" className={classes.zoomIn }>
+                       <ZoomInIcon  onClick={this.zoomIn}/>
                    </IconButton>
-                   <IconButton   type="submit" className={classes.zoomOut} >
+                   <IconButton  id='zoomOut' type="submit" className={classes.zoomOut} >
                        <ZoomOutIcon onClick={this.zoomOut}/>
                    </IconButton>
                </div>
