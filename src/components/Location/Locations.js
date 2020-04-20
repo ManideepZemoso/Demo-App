@@ -36,8 +36,8 @@ class Locations extends React.Component{
                 <div>
                     <h1>Locations</h1>
                     <div style={{marginBottom:'10px'}}>
-                        <button onClick={this.props.sortFn}> SortBy Id</button>
-                       <button onClick={this.props.updateToBrowser}>Add new location</button>
+                        <button id="sorting" onClick={this.props.sortFn}> SortBy Id</button>
+                       <button id="AddNewLocation" onClick={this.props.updateToBrowser}>Add new location</button>
                     </div>
                     <TableContainer component={Paper}>
                         <Table className='' aria-label="simple table">
