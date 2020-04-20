@@ -16,9 +16,9 @@ class Locations extends React.Component{
     }
 
     sortById() {
-        console.log('sort byid function call');
+        //console.log('sort byid function call');
         this.props.LocationList.sort((a, b) => (a.id > b.id) ? 1 : -1);
-        console.log(this.props.LocationList);
+        //console.log(this.props.LocationList);
         this.forceUpdate();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -28,7 +28,7 @@ class Locations extends React.Component{
     }
 
     render(){
-        console.log(this.props);
+        //console.log(this.props);
         return (
 
             <div style={{padding: '20px',
