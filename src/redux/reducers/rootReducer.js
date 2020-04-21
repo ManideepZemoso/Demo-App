@@ -3,8 +3,8 @@ import mapReducer from "./mapReducer";
 import locationReducer from "./LocationReducer";
 
 const rootReducer= combineReducers({
-    mapReducer,
-    locationReducer
+    map:mapReducer,
+    location:locationReducer
 });
 
 export default rootReducer;

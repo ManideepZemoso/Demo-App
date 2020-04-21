@@ -1,10 +1,14 @@
-/*import {UPDATE_LAT,UPDATE_LONG,ZOOM} from "./mapType";*/
-import  {UPDATE_CORDINATES} from "../types/mapType";
-import * as map from "mapbox-gl";
-import GetLocationData from '../../components/LocationComponents/LocationCordinates';
+import  {UPDATE_CORDINATES,UPDATE_MAPSTYLE} from "../types/mapType";
 
-const mapReducer =(state= [] ,action) => {
-    console.log(state)
+
+const intialState={
+    lng: 78.486671,
+    lat: 17.385044,
+    zoom: 5,
+    mapStyle:'mapbox://styles/mapbox/streets-v11'
+}
+const mapReducer =(state= intialState ,action) => {
+    console.log(state);
     switch(action.type){
         case UPDATE_CORDINATES: return {
             ...state,
@@ -12,14 +16,19 @@ const mapReducer =(state= [] ,action) => {
             lng:action.payload.lng,
             zoom:action.payload.zoom
         };
-    /*    case UPDATE_LONG: return {
-            ...state,
-            log:map.getCenter().log.toFixed(4)
-        }
-        case ZOOM: return {
-            ...state,
-            zoom:map.getZoom().toFixed(2)
-        }*/
+        case UPDATE_MAPSTYLE:
+            if(state.mapStyle === 'mapbox://styles/mapbox/streets-v11'){
+                return {
+                    ...state,
+                    mapStyle:'mapbox://styles/mapbox/satellite-v9'
+                }
+            }
+            else{
+                return {
+                    ...state,
+                    mapStyle:'mapbox://styles/mapbox/streets-v11'
+                }
+            };
         default :return state;
 
     }

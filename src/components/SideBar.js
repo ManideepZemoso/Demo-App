@@ -15,10 +15,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Navigation from "./Navigation";
-import {NavLink,withRouter} from "react-router-dom";
-import Link from "@material-ui/core/Link";
-import mapboxgl from 'mapbox-gl';
-import {Map} from "./MapComponents/Map";
+import {NavLink} from "react-router-dom";
+
 
 
 const drawerWidth = 240;
@@ -140,7 +138,7 @@ function SideBar(props) {
                     {!window.sessionStorage.getItem('isAuthenticated')?
                         ['Map'  ].map((text, index) => (
                         <ListItem button key={text}>
-                           <NavLink Style={{
+                           <NavLink style={{
                                 fontWeight: "bold"}} to='/map'>
                                <ListItemText primary={text} />
                            </NavLink>
@@ -151,7 +149,7 @@ function SideBar(props) {
                             //     <ListItem button component={Link} to='/some-url'>...</ListItem>
                             // </ListItem>
                             <ListItem button key={text}>
-                                <NavLink Style={{
+                                <NavLink style={{
                                     fontWeight: "bold"}} to={'/'+text.toLowerCase()}>
                                     <ListItemText primary={text} />
                                 </NavLink>
@@ -167,4 +165,4 @@ function SideBar(props) {
         </div>
     );
 }
-export default withRouter(SideBar);
+export default SideBar;

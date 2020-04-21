@@ -3,30 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "jest": "^24.9.0",
     "mapbox-gl": "^1.9.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "latest",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "@material-ui/core": "latest",
-    "redux": "latest",
-    "react-redux": "latest",
-    "@material-ui/icons": "latest"
+    "redux": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "coverage": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": {
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ],
+    "transformIgnorePatterns": [
+     "/node_modules/mapbox-gl-js-mock"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/serviceWorker.js",
+      "!**/index.js"
+    ]
+  },
+"browserslist": {
     "production": [
       ">0.2%",
       "not dead",
@@ -37,5 +55,31 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-throw-expressions",
+      "@babel/plugin-proposal-class-properties"
+      ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/node": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^24.9.0",
+    "mapbox-gl-js-mock": "latest"
   }
 }
