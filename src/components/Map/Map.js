@@ -9,99 +9,120 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 
-const styles ={
+
+
+const styles= theme => ({
     sidebarStyle: {
-    display: 'inline-block',
-    position: 'absolute',
-    top: '80px',
-    right:'0',
-    margin: '12px',
-    backgroundColor: '#404040',
-    color: '#ffffff',
-    zIndex: '1 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
+        display: 'inline-block',
+        position: 'absolute',
+        top: '80px',
+        right:'0',
+        margin: '12px',
+        backgroundColor: '#404040',
+        color: '#ffffff',
+        zIndex: '1 !important',
+        padding: theme.spacing(1),
+        fontWeight: 'bold'
+    },
     buttonStyle:{
-    position: 'absolute',
-    bottom: '50px',
-    right:'0',
-    margin: '12px',
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
+        position: 'absolute',
+        bottom: '30px',
+        right:'0',
+        margin: '10px',
+        backgroundColor: 'white',
+        color: 'black',
+        zIndex: '2 !important',
+        padding: '6px',
+        fontWeight: 'bold',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth:'200px',
+        },
+        [theme.breakpoints.up('md')]: {
+            maxWidth:'60px',
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth:'60px',
+        },
+    },
+    searchboxStyle:{
+        position: 'absolute',
+        top:'200px',
+        margin: '8px',
+        color: 'black',
+        zIndex: '2 !important',
+        fontWeight: 'bold',
+        padding: theme.spacing(1),
+        backgroundColor:'white',
+        [theme.breakpoints.down('sm')]: {
+            left:'10%',
+        },
+        [theme.breakpoints.up('md')]: {
+            left:'30%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            left:'40%',
+        },
+    },
     changeVIew:{
-    backgroundColor: 'white',
-    color: 'black',
-    display: 'inline-list-item'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
+    },
     zoomIn:{
-    backgroundColor: 'white',
-    color: 'black',
-    display: 'inline-list-item'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
+    },
     zoomOut:{
         backgroundColor: 'white',
         color: 'black',
-        display: 'inline-list-item'
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
     },
     addLocationStyle:{
-    display: 'inline-block',
-    position: 'absolute',
-    top: '300px',
-    right:'0',
-    margin: '12px',
-    zIndex: '1 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
-    searchboxStyle:{
-    position: 'absolute',
-    top:'200px',
-    margin: '12px',
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2 !important',
-    padding: '6px',
-    left:'40%',
-    fontWeight: 'bold'
-},
+        display: 'inline-block',
+        position: 'absolute',
+        top: '300px',
+        right:'0',
+        margin: '12px',
+        zIndex: '1 !important',
+        padding: '6px',
+        fontWeight: 'bold'
+    },
+
     searchSubmit:{
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        zIndex: '2',
+        padding:10
+    },
     input:{
-    position: 'absolute',
-    padding: '10px',
-    backgroundColor: 'white',
-    color: '#ffffff',
-    zIndex: '1 !important',
-    fontWeight: 'bold',
-    width:'100px'
-},
+        position: 'absolute',
+        marginLeft:theme.spacing(1),
+        flex:1,
+        backgroundColor: 'white',
+        color: '#ffffff',
+        zIndex: '1 !important',
+    },
     mapContainer:{
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    left: '0',
-    bottom: '0'
-}
-
-};
-
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        left: '0',
+        bottom: '0'
+    }
+});
 
 
 let LatNLong='19,13';
-
 class Map extends React.Component{
     map;
     constructor(props) {
-        /*console.log(props.mapStyle);
-        console.log(props);*/
         super(props);
         this.searchSubmit=this.searchSubmit.bind(this);
         this.changeView=this.changeView.bind(this);
@@ -147,7 +168,6 @@ class Map extends React.Component{
          LatNLong=e.target.value;
      }
      searchSubmit() {
-        // console.log(LatNLong);
          this.map.flyTo({
              center: [
                  LatNLong.split(',')[0],
@@ -157,7 +177,6 @@ class Map extends React.Component{
          let marker = new mapboxgl.Marker()
              .setLngLat(LatNLong.split(','))
              .addTo(this.map);
-         // this.props.AddLocation(5,'newplace',LatNLong.split(',')[0],LatNLong.split(',')[1]);
      }
     changeView(){
         this.props.UpdateMapStyle();
