@@ -16,9 +16,7 @@ class Locations extends React.Component{
     }
 
     sortById() {
-        //console.log('sort byid function call');
         this.props.LocationList.sort((a, b) => (a.id > b.id) ? 1 : -1);
-        //console.log(this.props.LocationList);
         this.forceUpdate();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -28,7 +26,6 @@ class Locations extends React.Component{
     }
 
     render(){
-        //console.log(this.props);
         return (
 
             <div style={{padding: '20px',
@@ -36,8 +33,8 @@ class Locations extends React.Component{
                 <div>
                     <h1>Locations</h1>
                     <div style={{marginBottom:'10px'}}>
-                        <button id="sorting" onClick={this.props.sortFn}> SortBy Id</button>
-                       <button id="AddNewLocation" onClick={this.props.updateToBrowser}>Add new location</button>
+                        <button testId="sortBtn" onClick={this.props.sortFn}> SortBy Id</button>
+                       <button testId="AddNewLocationBtn" onClick={this.props.updateToBrowser}>Add new location</button>
                     </div>
                     <TableContainer component={Paper}>
                         <Table className='' aria-label="simple table">

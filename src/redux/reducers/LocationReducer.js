@@ -31,8 +31,6 @@ const intialState={
 }
 
 const locationReducer=(state=intialState,action)=>{
-    console.log(state);
-    console.log(action);
     switch(action.type){
         case ADD_LOCATION: {
             const item={

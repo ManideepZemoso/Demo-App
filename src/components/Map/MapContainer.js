@@ -16,20 +16,15 @@ class MapContainer extends React.Component {
         super(props);
         locationList=props.locationList;
         isFromNewlocation = false;
-        console.log(isFromNewlocation);
         if(props.match.path==='/locations/new'){
             isFromNewlocation=true;
-            console.log(isFromNewlocation);
         }
         let id=props.match.params.location_id;
         isCallFromLocation=false;
 
-        console.log(isFromNewlocation);
         for(let i=0;i<locationList.length;i++){
-            console.log(locationList[i]);
             lastlocationId=i;
             if(id==locationList[i].id){
-                console.log(locationList[i]);
                 isCallFromLocation=true;
                 this.props.UpdateCordinates(locationList[i].Latitude, locationList[i].Longitude, 15)
                 break;

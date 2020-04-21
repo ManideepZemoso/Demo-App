@@ -32,7 +32,6 @@ class LoginForm extends React.Component{
                 //alert("login successful");
                 isSuccesfulLogin=true;
             }
-            console.log(this.state.username === GetData[i].username);
         }
         if(isSuccesfulLogin){
             window.sessionStorage.setItem('isAuthenticated','true');

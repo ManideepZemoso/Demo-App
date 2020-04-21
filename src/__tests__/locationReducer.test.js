@@ -77,9 +77,7 @@ describe('post reducer', () => {
                 lng: 56,
                 lat: 78},
         };
-        //console.log(state);
         const middleState=locationReducer(state, updateAction);
-        //console.log(middleState);
         expect(middleState).toEqual(finalState);
     });
 

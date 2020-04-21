@@ -7,14 +7,11 @@ let locationlist;
 class LocationsContainer extends React.Component{
     constructor(props) {
         super(props);
-        console.log(props);
         locationlist=props.locations;
-        console.log(locationlist);
         this.updateToBrowser=this.updateToBrowser.bind(this);
         this.sortFn=this.sortFn.bind(this);
     }
     updateToBrowser(){
-        console.log(this.props);
         this.props.history.push('/locations/new');
     }
     sortFn(){
