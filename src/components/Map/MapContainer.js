@@ -26,7 +26,7 @@ class MapContainer extends React.Component {
             lastlocationId=i;
             if(id==locationList[i].id){
                 isCallFromLocation=true;
-                this.props.UpdateCordinates(locationList[i].Latitude, locationList[i].Longitude, 15)
+                this.props.UpdateCordinates(locationList[i].latitude, locationList[i].longitude, 15)
                 break;
             }
 

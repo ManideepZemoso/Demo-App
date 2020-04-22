@@ -161,7 +161,7 @@ class Map extends React.Component{
          console.log(LatNLong);
      }
      addLocation(){
-         this.props.AddLocation(this.props.lastlocationId+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
+         this.props.AddLocation((this.props.lastlocationId)+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
      }
 
      updateValue(e){
