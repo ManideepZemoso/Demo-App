@@ -10,6 +10,7 @@ let lastlocationId;
 let isFromNewlocation;
 let locationList;
 let isCallFromLocation;
+let locationid;
 class MapContainer extends React.Component {
 
     constructor(props) {
@@ -19,14 +20,14 @@ class MapContainer extends React.Component {
         if(props.match.path==='/locations/new'){
             isFromNewlocation=true;
         }
-        let id=props.match.params.location_id;
+        locationid=props.match.params.location_id;
         isCallFromLocation=false;
 
         for(let i=0;i<locationList.length;i++){
             lastlocationId=i;
-            if(id==locationList[i].id){
+            if(locationid==locationList[i].id){
                 isCallFromLocation=true;
-                this.props.UpdateCordinates(locationList[i].latitude, locationList[i].longitude, 15)
+                this.props.UpdateCordinates(locationList[i].latitude, locationList[i].longitude, 15);
                 break;
             }
 
@@ -37,7 +38,7 @@ class MapContainer extends React.Component {
     }
     render() {
         return (
-           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom} mapStyle={this.props.mapStyle}  UpdateMapStyle={this.props.UpdateMapStyle}
+           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom} mapStyle={this.props.mapStyle}  UpdateMapStyle={this.props.UpdateMapStyle} locationList={this.props.locationList}  locationid={locationid}
                 isCallFromLocation={isCallFromLocation} isFromNewlocation={isFromNewlocation} UpdateCordinates={this.props.UpdateCordinates} AddLocation={this.props.AddLocation} lastlocationId={lastlocationId}/>
         );
     }

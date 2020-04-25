@@ -24,21 +24,17 @@ class Locations extends React.Component{
         if(prevProps.sort!==this.props.sort && this.props.sort===true){
             this.sortById();
         }
-        if(prevProps.LocationList!==this.props.LocationList){
-            console.log(prevProps.LocationList);
-            console.log(this.props.LocationList);
-            this.forceUpdate();
-        }
     }
+
+
 
     render(){
         let locationRows=this.props.LocationList.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} onClick={()=>this.props.updateToNavlink(row.id)}>
                 <TableCell component="th" scope="row">
                     {row.id}
                 </TableCell>
-                <TableCell align="right"><NavLink to={'/locations/'+ row.id}> <Button  style={{height:'30px',fontSize:'10px',fontWeight:'bold'}} variant="contained" color="primary">{row.location}</Button>
-                </NavLink></TableCell>
+                <TableCell align="right">{row.location}</TableCell>
                 <TableCell align="right">{row.longitude}</TableCell>
                 <TableCell align="right">{row.latitude}</TableCell>
             </TableRow>

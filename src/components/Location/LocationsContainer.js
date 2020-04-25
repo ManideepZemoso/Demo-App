@@ -9,6 +9,7 @@ class LocationsContainer extends React.Component{
         super(props);
         locationlist=props.locations;
         this.updateToBrowser=this.updateToBrowser.bind(this);
+        this.updateToNavlink=this.updateToNavlink.bind(this);
         this.sortFn=this.sortFn.bind(this);
 
     }
@@ -18,6 +19,9 @@ class LocationsContainer extends React.Component{
         }
         console.log(locationlist);
 
+    }
+    updateToNavlink(id) {
+        this.props.history.push('/locations/'+id);
     }
 
     updateToBrowser(){
@@ -31,7 +35,7 @@ class LocationsContainer extends React.Component{
 
      return (
 
-         <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={this.props.locations}> </Locations>
+         <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={this.props.locations} updateToNavlink={this.updateToNavlink}> </Locations>
 
      );
  }

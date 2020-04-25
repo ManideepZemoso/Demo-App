@@ -145,12 +145,13 @@ class Map extends React.Component{
         this.map.on('click',(e)=>{this.getCordinate(e)} );
 
        if(this.props.isCallFromLocation){
-             LatNLong= this.props.lat+','+ this.props.lng;
+           LatNLong= this.props.locationList[this.props.locationid-1].latitude+','+ this.props.locationList[this.props.locationid-1].longitude;
              this.searchSubmit();
          }
 
      }
-     getCordinate(e){
+
+    getCordinate(e){
          let coordinate = this.map.unproject(e.point);
          let popup = new mapboxgl.Popup({ closeOnClick: false })
              .setLngLat(coordinate)
@@ -161,7 +162,7 @@ class Map extends React.Component{
          console.log(LatNLong);
      }
      addLocation(){
-         this.props.AddLocation((this.props.lastlocationId)+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
+         this.props.AddLocation((this.props.lastlocationId)+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[1],LatNLong.split(',')[0]);
      }
 
      updateValue(e){
@@ -170,8 +171,8 @@ class Map extends React.Component{
      searchSubmit() {
          this.map.flyTo({
              center: [
-                 LatNLong.split(',')[0],
-                 LatNLong.split(',')[1]
+                 LatNLong.split(',')[1],
+                 LatNLong.split(',')[0]
              ],zoom:15
          });
          let marker = new mapboxgl.Marker()
