@@ -154,13 +154,22 @@ class Map extends React.Component{
 
     getCordinate(e){
          let coordinate = this.map.unproject(e.point);
-         let popup = new mapboxgl.Popup({ closeOnClick: false })
-             .setLngLat(coordinate)
-             .setHTML(`<h4>${coordinate}</h4>`)
-             .addTo(this.map);
+         let isFromNewLocation=this.props.isFromNewlocation;
+        let popup;
+         if(!isFromNewLocation){
+              popup= new mapboxgl.Popup()
+                 .setLngLat(coordinate)
+                 .setHTML(`<div><h4>${coordinate}</h4><div>`)
+                 .addTo(this.map);
+         }
+         else{
+             popup= new mapboxgl.Popup()
+                 .setLngLat(coordinate)
+                 .setHTML(`<div><h4>${coordinate}</h4><Button id="AddLocationButton"variant="contained" color="secondary"  onClick=${this.addLocation()}>Add this to location</Button><div>`)
+                 .addTo(this.map);
+         }
+
          LatNLong=coordinate.lng+','+coordinate.lat;
-         console.log(coordinate);
-         console.log(LatNLong);
      }
      addLocation(){
          this.props.AddLocation((this.props.lastlocationId)+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[1],LatNLong.split(',')[0]);
@@ -226,11 +235,6 @@ class Map extends React.Component{
                        <ZoomOutIcon onClick={this.zoomOut}/>
                    </IconButton>
                </div>
-
-                       <div className={classes.addLocationStyle}>
-                           <Button id="AddLocationButton"variant="contained" color="primary"  onClick={this.addLocation} disabled={!(this.props.isFromNewlocation)}>Add this to location</Button>
-                       </div>
-
                 <div ref={el => this.mapContainer = el} className={classes.mapContainer} />
             </div>
         );
