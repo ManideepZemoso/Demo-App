@@ -2,6 +2,7 @@ import React from "react";
 import {fetchLocations,updateSort} from "../../redux/actions/locationsAction";
 import {connect} from "react-redux";
 import Locations from './Locations'
+import SideBar from "../SideBar";
 
 let locationlist;
 class LocationsContainer extends React.Component{
@@ -34,8 +35,11 @@ class LocationsContainer extends React.Component{
     render() {
 
      return (
+         <div>
+             <SideBar/>
+             <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={this.props.locations} updateToNavlink={this.updateToNavlink}> </Locations>
+         </div>
 
-         <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={this.props.locations} updateToNavlink={this.updateToNavlink}> </Locations>
 
      );
  }

@@ -12,7 +12,7 @@ export default class Router extends React.Component{
     render() {
         return (
         <BrowserRouter>
-            <SideBar/>
+
             <Switch>
                 <Route path="/" component={MapContainer} exact  appProps={this.props} ></Route>
                 <Route path="/login" component={LoginForm} appProps={this.props} />
