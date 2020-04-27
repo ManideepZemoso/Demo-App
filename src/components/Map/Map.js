@@ -145,7 +145,8 @@ class Map extends React.Component{
         this.map.on('click',(e)=>{this.getCordinate(e)} );
 
        if(this.props.isCallFromLocation){
-           LatNLong= this.props.locationList[this.props.locationid-1].latitude+','+ this.props.locationList[this.props.locationid-1].longitude;
+          // console.log(this.props.toolTipContent);
+           LatNLong= this.props.toolTipContent.latitude+','+ this.props.toolTipContent.longitude;
              this.searchSubmit();
          }
 
@@ -171,13 +172,14 @@ class Map extends React.Component{
      searchSubmit() {
          this.map.flyTo({
              center: [
-                 LatNLong.split(',')[1],
-                 LatNLong.split(',')[0]
+                 LatNLong.split(',')[0],
+                 LatNLong.split(',')[1]
              ],zoom:15
          });
          let marker = new mapboxgl.Marker()
              .setLngLat(LatNLong.split(','))
              .addTo(this.map);
+         console.log("marker");
      }
     changeView(){
         this.props.UpdateMapStyle();
