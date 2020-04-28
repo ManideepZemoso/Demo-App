@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import {UpdateCordinates, UpdateMapStyle} from "../../redux/actions/mapActions";
 import Map from './Map';
 import {AddLocation} from "../../redux/actions/locationsAction";
+import SideBar from "../SideBar";
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
 let lastlocationId;
 let isFromNewlocation;
 let locationList;
 let isCallFromLocation;
+let locationid;
 class MapContainer extends React.Component {
 
     constructor(props) {
@@ -19,14 +21,14 @@ class MapContainer extends React.Component {
         if(props.match.path==='/locations/new'){
             isFromNewlocation=true;
         }
-        let id=props.match.params.location_id;
+        locationid=props.match.params.location_id;
         isCallFromLocation=false;
 
         for(let i=0;i<locationList.length;i++){
             lastlocationId=i;
-            if(id==locationList[i].id){
+            if(locationid==locationList[i].id){
                 isCallFromLocation=true;
-                this.props.UpdateCordinates(locationList[i].Latitude, locationList[i].Longitude, 15)
+                this.props.UpdateCordinates(locationList[i].latitude, locationList[i].longitude, 15);
                 break;
             }
 
@@ -37,9 +39,12 @@ class MapContainer extends React.Component {
     }
     render() {
         return (
-           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom} mapStyle={this.props.mapStyle}  UpdateMapStyle={this.props.UpdateMapStyle}
+            <div>
+            <SideBar/>
+           <Map lat={this.props.lat} lng={this.props.lng} zoom={this.props.zoom} mapStyle={this.props.mapStyle}  UpdateMapStyle={this.props.UpdateMapStyle} toolTipContent={this.props.locationList[locationid-1]}
                 isCallFromLocation={isCallFromLocation} isFromNewlocation={isFromNewlocation} UpdateCordinates={this.props.UpdateCordinates} AddLocation={this.props.AddLocation} lastlocationId={lastlocationId}/>
-        );
+            </div>
+                );
     }
 
 

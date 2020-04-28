@@ -1,7 +1,8 @@
 import React from "react";
-import {GetLocations,updateSort} from "../../redux/actions/locationsAction";
+import {fetchLocations,updateSort} from "../../redux/actions/locationsAction";
 import {connect} from "react-redux";
 import Locations from './Locations'
+import SideBar from "../SideBar";
 
 let locationlist;
 class LocationsContainer extends React.Component{
@@ -9,8 +10,21 @@ class LocationsContainer extends React.Component{
         super(props);
         locationlist=props.locations;
         this.updateToBrowser=this.updateToBrowser.bind(this);
+        this.updateToNavlink=this.updateToNavlink.bind(this);
         this.sortFn=this.sortFn.bind(this);
+
     }
+    componentDidMount() {
+        if(this.props.locations.length===0){
+            locationlist=this.props.fetchLocations();
+        }
+        console.log(locationlist);
+
+    }
+    updateToNavlink(id) {
+        this.props.history.push('/locations/'+id);
+    }
+
     updateToBrowser(){
         this.props.history.push('/locations/new');
     }
@@ -19,9 +33,14 @@ class LocationsContainer extends React.Component{
     }
 
     render() {
-     return (
 
-        <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={locationlist}> </Locations>
+     return (
+         <div>
+             <SideBar/>
+             <Locations sort={this.props.sort} sortFn={this.sortFn} updateToBrowser={this.updateToBrowser} LocationList={this.props.locations} updateToNavlink={this.updateToNavlink}> </Locations>
+         </div>
+
+
      );
  }
 }
@@ -35,7 +54,7 @@ function mapStateToProps({location}){
 
 function  mapDispatchToProps(dispatch) {
     return{
-        GetLocations:()=>dispatch(GetLocations()),
+        fetchLocations:()=>dispatch(fetchLocations()),
         updateSort:()=>dispatch(updateSort())
     };
 }

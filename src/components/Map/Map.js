@@ -9,99 +9,120 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 
-const styles ={
+
+
+const styles= theme => ({
     sidebarStyle: {
-    display: 'inline-block',
-    position: 'absolute',
-    top: '80px',
-    right:'0',
-    margin: '12px',
-    backgroundColor: '#404040',
-    color: '#ffffff',
-    zIndex: '1 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
+        display: 'inline-block',
+        position: 'absolute',
+        top: '80px',
+        right:'0',
+        margin: '12px',
+        backgroundColor: '#404040',
+        color: '#ffffff',
+        zIndex: '1 !important',
+        padding: theme.spacing(1),
+        fontWeight: 'bold'
+    },
     buttonStyle:{
-    position: 'absolute',
-    bottom: '50px',
-    right:'0',
-    margin: '12px',
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
+        position: 'absolute',
+        bottom: '30px',
+        right:'0',
+        margin: '10px',
+        backgroundColor: 'white',
+        color: 'black',
+        zIndex: '2 !important',
+        padding: '6px',
+        fontWeight: 'bold',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth:'200px',
+        },
+        [theme.breakpoints.up('md')]: {
+            maxWidth:'60px',
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth:'60px',
+        },
+    },
+    searchboxStyle:{
+        position: 'absolute',
+        top:'200px',
+        margin: '8px',
+        color: 'black',
+        zIndex: '2 !important',
+        fontWeight: 'bold',
+        padding: theme.spacing(1),
+        backgroundColor:'white',
+        [theme.breakpoints.down('sm')]: {
+            left:'10%',
+        },
+        [theme.breakpoints.up('md')]: {
+            left:'30%',
+        },
+        [theme.breakpoints.up('lg')]: {
+            left:'40%',
+        },
+    },
     changeVIew:{
-    backgroundColor: 'white',
-    color: 'black',
-    display: 'inline-list-item'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
+    },
     zoomIn:{
-    backgroundColor: 'white',
-    color: 'black',
-    display: 'inline-list-item'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
+    },
     zoomOut:{
         backgroundColor: 'white',
         color: 'black',
-        display: 'inline-list-item'
+        display: 'inline-list-item',
+        borderStyle:'solid',
+        borderColor: 'black'
     },
     addLocationStyle:{
-    display: 'inline-block',
-    position: 'absolute',
-    top: '300px',
-    right:'0',
-    margin: '12px',
-    zIndex: '1 !important',
-    padding: '6px',
-    fontWeight: 'bold'
-},
-    searchboxStyle:{
-    position: 'absolute',
-    top:'200px',
-    margin: '12px',
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2 !important',
-    padding: '6px',
-    left:'40%',
-    fontWeight: 'bold'
-},
+        display: 'inline-block',
+        position: 'absolute',
+        top: '300px',
+        right:'0',
+        margin: '12px',
+        zIndex: '1 !important',
+        padding: '6px',
+        fontWeight: 'bold'
+    },
+
     searchSubmit:{
-    backgroundColor: 'white',
-    color: 'black',
-    zIndex: '2'
-},
+        backgroundColor: 'white',
+        color: 'black',
+        zIndex: '2',
+        padding:10
+    },
     input:{
-    position: 'absolute',
-    padding: '10px',
-    backgroundColor: 'white',
-    color: '#ffffff',
-    zIndex: '1 !important',
-    fontWeight: 'bold',
-    width:'100px'
-},
+        position: 'absolute',
+        marginLeft:theme.spacing(1),
+        flex:1,
+        backgroundColor: 'white',
+        color: '#ffffff',
+        zIndex: '1 !important',
+    },
     mapContainer:{
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    left: '0',
-    bottom: '0'
-}
-
-};
-
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        left: '0',
+        bottom: '0'
+    }
+});
 
 
 let LatNLong='19,13';
-
 class Map extends React.Component{
     map;
     constructor(props) {
-        /*console.log(props.mapStyle);
-        console.log(props);*/
         super(props);
         this.searchSubmit=this.searchSubmit.bind(this);
         this.changeView=this.changeView.bind(this);
@@ -124,30 +145,40 @@ class Map extends React.Component{
         this.map.on('click',(e)=>{this.getCordinate(e)} );
 
        if(this.props.isCallFromLocation){
-             LatNLong= this.props.lat+','+ this.props.lng;
+          // console.log(this.props.toolTipContent);
+           LatNLong= this.props.toolTipContent.latitude+','+ this.props.toolTipContent.longitude;
              this.searchSubmit();
          }
 
      }
-     getCordinate(e){
+
+    getCordinate(e){
          let coordinate = this.map.unproject(e.point);
-         let popup = new mapboxgl.Popup({ closeOnClick: false })
-             .setLngLat(coordinate)
-             .setHTML(`<h4>${coordinate}</h4>`)
-             .addTo(this.map);
+         let isFromNewLocation=this.props.isFromNewlocation;
+        let popup;
+         if(!isFromNewLocation){
+              popup= new mapboxgl.Popup()
+                 .setLngLat(coordinate)
+                 .setHTML(`<div><h4>${coordinate}</h4><div>`)
+                 .addTo(this.map);
+         }
+         else{
+             popup= new mapboxgl.Popup()
+                 .setLngLat(coordinate)
+                 .setHTML(`<div><h4>${coordinate}</h4><Button id="AddLocationButton"variant="contained" color="secondary"  onClick=${this.addLocation()}>Add this to location</Button><div>`)
+                 .addTo(this.map);
+         }
+
          LatNLong=coordinate.lng+','+coordinate.lat;
-         console.log(coordinate);
-         console.log(LatNLong);
      }
      addLocation(){
-         this.props.AddLocation(this.props.lastlocationId+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[0],LatNLong.split(',')[1]);
+         this.props.AddLocation((this.props.lastlocationId)+2,'Location-'+((this.props.lastlocationId)+2),LatNLong.split(',')[1],LatNLong.split(',')[0]);
      }
 
      updateValue(e){
          LatNLong=e.target.value;
      }
      searchSubmit() {
-        // console.log(LatNLong);
          this.map.flyTo({
              center: [
                  LatNLong.split(',')[0],
@@ -157,7 +188,7 @@ class Map extends React.Component{
          let marker = new mapboxgl.Marker()
              .setLngLat(LatNLong.split(','))
              .addTo(this.map);
-         // this.props.AddLocation(5,'newplace',LatNLong.split(',')[0],LatNLong.split(',')[1]);
+         console.log("marker");
      }
     changeView(){
         this.props.UpdateMapStyle();
@@ -204,11 +235,6 @@ class Map extends React.Component{
                        <ZoomOutIcon onClick={this.zoomOut}/>
                    </IconButton>
                </div>
-
-                       <div className={classes.addLocationStyle}>
-                           <Button id="AddLocationButton"variant="contained" color="primary"  onClick={this.addLocation} disabled={!(this.props.isFromNewlocation)}>Add this to location</Button>
-                       </div>
-
                 <div ref={el => this.mapContainer = el} className={classes.mapContainer} />
             </div>
         );

@@ -2,6 +2,7 @@ import React from "react";
 import Input from '@material-ui/core/Input';
 import GetData from './ValidCredentials.json';
 import { withStyles } from '@material-ui/core/styles';
+import SideBar from "../SideBar";
 
 
 const styles ={
@@ -44,6 +45,8 @@ class LoginForm extends React.Component{
     render() {
         const {classes}=this.props;
         return (
+            <div>
+                <SideBar/>
             <div className={classes.loginformStyle}>
                 <div>
                     <h1 style={{alignment:'center' ,top:'200px',width:'200px' } }>Login Form</h1>
@@ -68,6 +71,7 @@ class LoginForm extends React.Component{
 
                 </form>
 
+            </div>
             </div>
 
         );

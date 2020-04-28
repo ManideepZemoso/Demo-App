@@ -29,13 +29,13 @@ describe('<Location/>', () => {
 
     it('should call sortFn when click on sortbyid button ', function () {
         const component = shallow(<Locations {...props}/>);
-        const sortbyId = component.find('button[testId="sortBtn"]');
+        const sortbyId = component.find('button[testid="sortBtn"]');
         sortbyId.simulate('click');
         expect(props.sortFn).toHaveBeenCalled();
     });
     it('should call updateBrowser method when click on AddNewlocation button ', function () {
         const component = shallow(<Locations {...props}/>);
-        const addnewlocation = component.find('button[testId="AddNewLocationBtn"]');
+        const addnewlocation = component.find('button[testid="AddNewLocationBtn"]');
         addnewlocation.simulate('click');
         expect(props.updateToBrowser).toHaveBeenCalled();
     });
