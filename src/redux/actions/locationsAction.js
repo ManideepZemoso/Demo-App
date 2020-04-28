@@ -2,6 +2,7 @@ import {ADD_LOCATION} from "../types/loctionsType";
 import {GET_LOCATIONS} from "../types/loctionsType";
 import  {SORT} from "../types/loctionsType";
 import axios from 'axios';
+import {convertServiceTolocationPayload} from "../../Converters/locationConvertor";
 /*export const UpdateLocation=(lng,lat,zoom) => {
     return {
         type:UPDATE_LOCATION,
@@ -11,7 +12,7 @@ import axios from 'axios';
 export const GetLocations =(locations)=>{
     return{
         type:GET_LOCATIONS,
-        payload: {locations}
+        payload: convertServiceTolocationPayload(locations)
     }
 }
 export const AddLocation =(locationId,locationName,lng,lat)=>{
